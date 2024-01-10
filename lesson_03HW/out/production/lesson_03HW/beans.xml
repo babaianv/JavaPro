@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="dir" class="app.staff.administration.Director">
+        <property name="manager" ref="mang"/>
+    </bean>
+
+    <bean id="mang" class="app.staff.administration.Manager">
+        <property name="teamLead" ref="t_ld"/>
+        <property name="taskExecutor" ref="t_e"/>
+        <property name="taskLogger" ref="t_l"/>
+    </bean>
+
+    <bean id="t_ld" class="app.staff.specialists.TeamLead"/>
+    <bean id="t_e" class="app.staff.specialists.TaskExecutor"/>
+    <bean id="t_l" class="app.staff.specialists.TaskLogger"/>
+
+</beans>
