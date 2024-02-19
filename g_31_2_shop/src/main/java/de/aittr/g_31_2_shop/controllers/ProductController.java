@@ -6,6 +6,7 @@ import de.aittr.g_31_2_shop.exception_handling.exception.FirstTestException;
 import de.aittr.g_31_2_shop.services.interfaces.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,15 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductDto> getAll() {
-        return service.getAllActiveProducts();
+    public ResponseEntity<List<ProductDto>> getAll() {
+        try {
+            List<ProductDto> products = service.getAllActiveProducts();
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/{id}")
     public ProductDto getById(@PathVariable int id) {
